@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+  <script src="https://ensaama-officiel-numerique.github.io/components/debug/debug.js"></script>
+  <script src="https://ensaama-officiel-numerique.github.io/components/effects/test3_notoggle/effects-model.js"></script>
+  <script src="https://ensaama-officiel-numerique.github.io/components/effects/test3_notoggle/scheduler.js"></script>
+  <script src="https://ensaama-officiel-numerique.github.io/components/audio/audio-control.js"></script>
+  <link rel="stylesheet" href="https://ensaama-officiel-numerique.github.io/components/audio/audio-control.css">
+
+  <!-- TIMELINE -->
+  <script type="application/json" id="scenario">
+  {
+    "timeline": [
+      { "time": 1000, "target": "#lampe", "event": "reboot" },
+      { "time": 6000, "target": "#lampe", "event": "reboot" },
+
+      { "time": 10000, "target": "#ordi1", "event": "reboot" },
+      { "time": 10000, "target": "#ecran1", "event": "reboot" },
+      { "time": 11000, "target": "#ordi1", "event": "reboot" },
+      { "time": 11000, "target": "#ecran1", "event": "reboot" },
+
+      { "time": 15000, "target": "#ordi2", "event": "reboot" },
+      { "time": 15000, "target": "#ecran2", "event": "reboot" },
+
+      { "time": 20000, "target": "#ordi3", "event": "reboot" },
+      { "time": 20000, "target": "#ecran3", "event": "reboot" },
+
+      { "time": 25000, "target": "#Bureau", "event": "reboot" },
+      { "time": 25000, "target": "#ecran4", "event": "reboot" },
+
+      { "time": 30000, "target": "#ordi1", "event": "reboot" },
+      { "time": 30000, "target": "#ecran1", "event": "reboot" },
+      { "time": 30000, "target": "#ordi2", "event": "reboot" },
+      { "time": 30000, "target": "#ecran2", "event": "reboot" },
+      { "time": 30000, "target": "#meuble", "event": "reboot" },
+
+      { "time": 31000, "target": "#ordi1", "event": "reboot" },
+      { "time": 31000, "target": "#ecran1", "event": "reboot" },
+      { "time": 31000, "target": "#ordi2", "event": "reboot" },
+      { "time": 31000, "target": "#ecran2", "event": "reboot" },
+      { "time": 31000, "target": "#meuble", "event": "reboot" },
+
+      { "time": 40000, "target": "#ordi3", "event": "reboot" },
+      { "time": 40000, "target": "#ecran3", "event": "reboot" },
+      { "time": 40000, "target": "#Bureau", "event": "reboot" },
+      { "time": 40000, "target": "#ecran4", "event": "reboot" },
+
+      { "time": 45000, "target": "#ordi1", "event": "reboot" },
+      { "time": 45000, "target": "#ecran1", "event": "reboot" },
+      { "time": 45000, "target": "#ordi2", "event": "reboot" },
+      { "time": 45000, "target": "#ecran2", "event": "reboot" },
+      { "time": 45000, "target": "#ordi3", "event": "reboot" },
+      { "time": 45000, "target": "#ecran3", "event": "reboot" },
+      { "time": 45000, "target": "#Bureau", "event": "reboot" },
+      { "time": 45000, "target": "#ecran4", "event": "reboot" },
+      { "time": 45000, "target": "#meuble", "event": "reboot" },
+
+      { "time": 50000, "target": "#ordi1", "event": "reboot" },
+      { "time": 50000, "target": "#ecran1", "event": "reboot" },
+      { "time": 50000, "target": "#ordi2", "event": "reboot" },
+      { "time": 50000, "target": "#ecran2", "event": "reboot" },
+      { "time": 50000, "target": "#ordi3", "event": "reboot" },
+      { "time": 50000, "target": "#ecran3", "event": "reboot" },
+      { "time": 50000, "target": "#Bureau", "event": "reboot" },
+      { "time": 50000, "target": "#ecran4", "event": "reboot" },
+      { "time": 50000, "target": "#meuble", "event": "reboot" },
+
+      { "time": 55000, "target": "#ordi1", "event": "desappear" },
+      { "time": 55000, "target": "#ordi2", "event": "desappear" },
+      { "time": 55000, "target": "#ordi3", "event": "desappear" },
+      { "time": 55000, "target": "#Bureau", "event": "desappear" },
+      { "time": 55000, "target": "#meuble", "event": "desappear" },
+      { "time": 55000, "target": "#ecran1", "event": "desappear" },
+      { "time": 55000, "target": "#ecran2", "event": "desappear" },
+      { "time": 55000, "target": "#ecran3", "event": "desappear" },
+      { "time": 55000, "target": "#ecran4", "event": "desappear" }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+  <a-scene
+    background="color: #000000"
+    debug-keyboard="key: p, e, r, t, y;
+    event: start, stop, start, stop, reboot, desappear, desappear, desappear;
+    target: #director, #director, #director, #director, #lampe, #ordi3, #ordi1, #ordi2">
+
+    <!-- DIRECTEUR DE LA TIMELINE -->
+    <a-entity
+      id="director"
+      scheduler="config: #scenario; duration: 60000; loop: false; autostart: true">
+    </a-entity>
+
+    <!-- ASSETS -->
+    <a-assets>
+      <img id="texture1" src="assets/image/Papier peint gris.jpg">
+      <img id="texture2" src="assets/image/parquet.jpg">
+      <audio id="musique" src="assets/audio/universfield-melancholic-ambient-background-351787.mp3" preload="auto" loop="false"></audio>
+      <a-asset-item id="model1OBJ" src="assets/3Dmodels/exp6_glb_3Dwhat_a_mess/Bureau/bureau.obj"></a-asset-item>
+      <a-asset-item id="model2OBJ" src="assets/3Dmodels/exp6_glb_3Dwhat_a_mess/Porte/scene.obj"></a-asset-item>
+      <a-asset-item id="model13OBJ" src="assets/3Dmodels/exp6_glb_3Dwhat_a_mess/Lampe/scene.obj"></a-asset-item>
+      <a-asset-item id="model4OBJ" src="./assets/3Dmodels/exp6_glb_3Dwhat_a_mess/ordi3/scene.obj"></a-asset-item>
+      <a-asset-item id="model5OBJ" src="assets/3Dmodels/exp6_glb_3Dwhat_a_mess/Meuble/scene.obj"></a-asset-item>
+      <a-asset-item id="model6OBJ" src="assets/3Dmodels/exp6_glb_3Dwhat_a_mess/ordi1/scene.obj"></a-asset-item>
+      <a-asset-item id="model7OBJ" src="assets/3Dmodels/exp6_glb_3Dwhat_a_mess/ordi2/scene.obj"></a-asset-item>
+    </a-assets>
+
+    <!-- SOL -->
+    <a-plane position="-0.968 -0.795 0.095" rotation="-90 0 0" height="4" width="4" material="src: #texture2; shader: standard"></a-plane>
+
+    <!-- ECRAN 1 -->
+    <a-plane
+      id="ecran1"
+      position="-2.575 0.94 -1.459"
+      rotation="-12 13 0"
+      scale="0.52 0.33 0.5"
+      material="color: #ffffff; emissive: #ffffff; emissiveIntensity: 0.5; side: double; transparent: true; opacity: 1"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0">
+      <a-light type="point" color="#ffffff" intensity="1" distance="3" position="0 0 0.1"></a-light>
+    </a-plane>
+
+    <!-- ECRAN 2 -->
+    <a-plane
+      id="ecran2"
+      position="-1.557 0.943 -1.365"
+      rotation="0 -120 0"
+      scale="0.55 0.33 0.5"
+      material="color: #ffffff; emissive: #ffffff; emissiveIntensity: 0.5; side: double; transparent: true; opacity: 1"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0">
+      <a-light type="point" color="#ffffff" intensity="1" distance="3" position="0 0 0.1"></a-light>
+    </a-plane>
+
+    <!-- ECRAN 3 -->
+    <a-plane
+      id="ecran3"
+      position="-1.334 0.586 1.028"
+      rotation="0 0 0"
+      scale="0.6 0.35 0.5"
+      material="color: #ffffff; emissive: #ffffff; emissiveIntensity: 0.5; side: double; transparent: true; opacity: 1"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0">
+      <a-light type="point" color="#ffffff" intensity="1" distance="3" position="0 0 0.1"></a-light>
+    </a-plane>
+
+    <!-- ECRAN 4 -->
+    <a-plane
+      id="ecran4"
+      position="-0.232 0.79 1.561"
+      rotation="0 0 0"
+      scale="1 0.55 0.5"
+      material="color: #ffffff; emissive: #ffffff; emissiveIntensity: 0.5; side: double; transparent: true; opacity: 1"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0">
+      <a-light type="point" color="#ffffff" intensity="1" distance="3" position="0 0 0.1"></a-light>
+    </a-plane>
+
+    <!-- MURS -->
+    <a-entity id="what-a-mess">
+      <a-box material="src: #texture1; shader: standard" depth="0.18" height="4" width="4" position="-3 1.2 0.091" rotation="0 90 0"></a-box>
+      <a-box material="src: #texture1; shader: standard" depth="0.18" height="4" width="4" position="-1 1.2 2" rotation="0 0 0"></a-box>
+      <a-box material="src: #texture1; shader: standard" depth="0.18" height="4" width="4" position="1.09 1.2 0.1" rotation="0 90 0"></a-box>
+      <a-box material="src: #texture1; shader: standard" depth="0.18" height="4" width="4" position="-0.95 1.194 -1.821" rotation="0 0 0"></a-box>
+    </a-entity>
+
+    <!-- CAMERA -->
+    <a-entity camera="active: true" look-controls wasd-controls="acceleration: 10" position="-1 1.6 0"></a-entity>
+
+    <!-- LUMIERES -->
+    <a-light id="ambientLight" type="ambient" color="#1a1a2e" intensity="0.5"></a-light>
+    <a-light id="directionalLight" type="directional" color="#0664ff" intensity="1.5" position="-2.123 1.115 1.542"></a-light>
+    <a-light id="directionalLight2" type="directional" color="#0664ff" intensity="1.5" position="0.071 1.115 0.107"></a-light>
+    <a-light id="pointLightLampe" type="point" color="#9b8800" intensity="2" position="-2.504 1.431 1.715" distance="5"></a-light>
+    <a-light id="sunsetLamp" type="spot" color="#ffffff" intensity="3" angle="45" penumbra="0.5" position="-1.664 0.927 -1.187" rotation="0 -90 0" distance="4"></a-light>
+    <a-light id="sunsetLamp2" type="spot" color="#512de1" intensity="3" angle="45" penumbra="0.5" position="-1.243 0.927 0.454" rotation="0 -90 0" distance="4"></a-light>
+    <a-light id="ledStrip" type="point" color="#ffffff" intensity="1.5" position="-1.405 0.618 0.567" distance="2" scale="0.5 0.5 0.5"></a-light>
+    <a-entity light="type: point; intensity: 0.75; distance: 50; decay: 2" position="0 10 10"></a-entity>
+
+    <!-- BUREAU -->
+    <a-entity
+      id="Bureau"
+      obj-model="obj: #model1OBJ"
+      material="color: #252525"
+      model-wireframe
+      model-transparent="opacity: 0.5"
+      model-desappear="opacity: 0; duration: 900"
+      model-delete
+      model-bluescreen="color: blue; duration: 200"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0"
+      position="-0.398 -0.787 -0.666"
+      scale="0.3 0.3 0.3"
+      rotation="0 90 0">
+    </a-entity>
+
+    <!-- PORTE -->
+    <a-entity id="porte" obj-model="obj: #model2OBJ" position="-0.103 0.649 -1.758" scale="4 4 4" rotation="0 180 0"></a-entity>
+
+    <!-- LAMPE -->
+    <a-entity
+      id="lampe"
+      obj-model="obj: #model13OBJ"
+      material="color: #252525"
+      model-wireframe
+      model-transparent="opacity: 0.2"
+      model-desappear="opacity: 0; duration: 900"
+      model-delete
+      model-bluescreen="color: blue; duration: 200"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0"
+      position="-2.434 1.754 1.435"
+      scale="0.015 0.015 0.015"
+      rotation="0 0 0">
+    </a-entity>
+
+    <!-- MEUBLE -->
+    <a-entity
+      id="meuble"
+      obj-model="obj: #model5OBJ"
+      material="color: #252525"
+      model-wireframe
+      model-transparent="opacity: 0.2"
+      model-desappear="opacity: 0; duration: 900"
+      model-delete
+      model-bluescreen="color: blue; duration: 200"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0"
+      position="-2.002 -0.795 -1.298"
+      scale="0.8 1.2 1"
+      rotation="0 0 0">
+    </a-entity>
+
+    <!-- ORDINATEUR 1 -->
+    <a-entity
+      id="ordi1"
+      obj-model="obj: #model6OBJ"
+      material="color: #2d2d2d"
+      model-wireframe
+      model-transparent="opacity: 0.2"
+      model-desappear="opacity: 0; duration: 900"
+      model-delete
+      model-bluescreen="color: blue; duration: 200"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0"
+      position="-2.3 0.725 -1.312"
+      scale="0.0025 0.003 0.003"
+      rotation="0 -15 0.7">
+    </a-entity>
+
+    <!-- ORDINATEUR 2 -->
+    <a-entity
+      id="ordi2"
+      obj-model="obj: #model7OBJ"
+      material="color: #2d2d2d"
+      model-wireframe
+      model-transparent="opacity: 0.2"
+      model-desappear="opacity: 0; duration: 900"
+      model-delete
+      model-bluescreen="color: blue; duration: 200"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0"
+      position="-1.372 0.727 -1.261"
+      scale="0.02 0.02 0.02"
+      rotation="0 60 0">
+    </a-entity>
+
+    <!-- ORDINATEUR 3 -->
+    <a-entity
+      id="ordi3"
+      obj-model="obj: #model4OBJ"
+      material="color: #2d2d2d"
+      model-transparent="opacity: 0.2"
+      model-desappear="opacity: 0; duration: 900"
+      model-delete
+      model-bluescreen="color: blue; duration: 200"
+      model-reboot="duration: 900; frequency: 4; slowdown: false; attempts: 0"
+      position="-1.333 0.338 0.795"
+      scale="0.0015 0.0015 0.0015"
+      rotation="0 180 0">
+    </a-entity>
+
+  </a-scene>
+
+  <!-- INTERFACE AUDIO -->
+  <div id="interface-son" style="position: fixed; bottom: 20px; left: 20px; z-index: 99999; background: rgba(255, 255, 255, 0.366); padding: 10px; border-radius: 8px; color: black;">
+    <button id="bouton" style="padding: 6px 13px; cursor: pointer;">SON ON</button>
+    <p class="audio-text" style="margin: 5px 0 0 0; font-size: 12px;">Touche 's' départ de la musique</p>
+  </div>
+
+  <!-- GESTION DE LA DISPARITION DES OBJETS -->
+  <script>
+    function traiterDisparition(id) {
+      const elem = document.querySelector(id);
+
+      if (!elem || elem.dataset.disparition === 'faite') return;
+
+      elem.dataset.disparition = 'faite';
+      elem.removeAttribute('model-reboot');
+      elem.removeAttribute('model-transparent');
+
+      if (id.startsWith('#ecran')) {
+        elem.setAttribute('material', 'transparent', true);
+
+        elem.setAttribute('animation__disappear', {
+          property: 'material.opacity',
+          from: 1,
+          to: 0,
+          dur: 900,
+          easing: 'linear'
+        });
+
+        const lumiere = elem.querySelector('a-light');
+
+        if (lumiere) {
+          lumiere.setAttribute('animation__off', {
+            property: 'light.intensity',
+            from: 1,
+            to: 0,
+            dur: 900,
+            easing: 'linear'
+          });
+        }
+      }
+
+      setTimeout(function () {
+        elem.setAttribute('visible', false);
+      }, 900);
+
+      setTimeout(function () {
+        elem.setAttribute('visible', false);
+        if (elem.parentNode) {
+          elem.parentNode.removeChild(elem);
+        }
+      }, 2000);
+    }
+
+    const tousLesElements = [
+      '#Bureau',
+      '#meuble',
+      '#ordi1',
+      '#ordi2',
+      '#ordi3',
+      '#ecran1',
+      '#ecran2',
+      '#ecran3',
+      '#ecran4'
+    ];
+
+    tousLesElements.forEach(function (id) {
+      const elem = document.querySelector(id);
+
+      if (elem) {
+        elem.addEventListener('desappear', function () {
+          traiterDisparition(id);
+        });
+      }
+    });
+
+    // RACCOURCIS CLAVIER
+    document.addEventListener('keydown', function (event) {
+      const key = event.key.toLowerCase();
+
+      if (key === 'e') {
+        traiterDisparition('#ecran3');
+        traiterDisparition('#ordi3');
+      }
+
+      if (key === 'r') {
+        traiterDisparition('#ecran1');
+        traiterDisparition('#ordi1');
+      }
+
+      if (key === 't') {
+        traiterDisparition('#ecran2');
+        traiterDisparition('#ordi2');
+      }
+
+      if (key === 'y') {
+        traiterDisparition('#ecran4');
+        traiterDisparition('#Bureau');
+      }
+    });
+  </script>
+
+  <!-- GESTION DU SON -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const musique = document.querySelector('#musique');
+      const boutonSon = document.querySelector('#bouton');
+
+      if (!musique || !boutonSon) {
+        console.error('Musique ou bouton audio introuvable.');
+        return;
+      }
+
+      function lancerSon() {
+        musique.play()
+          .then(function () {
+            boutonSon.textContent = 'SON OFF';
+          })
+          .catch(function (erreur) {
+            console.error('Impossible de lancer le son :', erreur);
+            boutonSon.textContent = 'RÉESSAYER';
+          });
+      }
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key.toLowerCase() === 's' && !event.repeat) {
+          lancerSon();
+        }
+      });
+
+      boutonSon.addEventListener('click', function () {
+        if (musique.paused) {
+          lancerSon();
+        } else {
+          musique.pause();
+          boutonSon.textContent = 'SON ON';
+        }
+      });
+
+      musique.addEventListener('error', function () {
+        console.error('Erreur de chargement du fichier audio. Vérifie le chemin assets/audio.');
+      });
+    });
+  </script>
+
+</body>
+</html>
